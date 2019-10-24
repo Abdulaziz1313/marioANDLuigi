@@ -10,6 +10,7 @@
 /// Don't forget the endif at the bottom
 /// </summary>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 enum class Direction
 {
@@ -41,10 +42,12 @@ private:
 	
 	void setupFontAndText();
 	void setupSprite();
+	void setupSound();
 	void changeCharacter();
 	void getDirection();
 	void centerText();
 	void move();
+	void checkBounds();
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_mariofont; // font used by message
@@ -58,6 +61,8 @@ private:
 	bool canChange{ true };
 	Direction m_heading{ Direction::None };
 	float m_speed{ 1.6f };
+	sf::SoundBuffer m_beepBuffer;
+	sf::Sound m_beepSound;
 
 };
 

@@ -22,6 +22,7 @@ Game::Game() :
 {
 	setupFontAndText(); // load font 
 	setupSprite(); // load texture
+	setupSound();
 }
 
 /// <summary>
@@ -125,6 +126,7 @@ void Game::update(sf::Time t_deltaTime)
 	}
 	getDirection();
 	move();
+	checkBounds();
 }
 
 /// <summary>
@@ -175,6 +177,17 @@ void Game::setupSprite()
 	m_logoSprite.setTexture(m_brosTexture);
 	m_logoSprite.setTextureRect(sf::IntRect{ 0, 0, 64, 148 });
 	m_logoSprite.setPosition(m_location - m_spriteOffset);
+}
+
+void Game::setupSound()
+{
+	if (!m_beepBuffer.loadFromFile("ASSETS\\AUDIO\\mario.wav"))
+	{
+		std::cout << "problem with sound" << std::endl;
+	}
+	
+	m_beepSound.setBuffer(m_beepBuffer);
+	
 }
 
 void Game::changeCharacter()
@@ -250,4 +263,36 @@ void Game::move()
 	m_location += move;
 	m_logoSprite.setPosition(m_location - m_spriteOffset);
 
+}
+
+void Game::checkBounds()
+{
+	bool bump{ false };
+	if (m_location.x < 0.0f)
+	{
+		m_location.x = 0.0f;
+		bump = true;
+	}
+	if (m_location.x > 800.0f)
+	{
+		m_location.x = 800.0f;
+		bump = true;
+	}
+	if (m_location.y < 0.0f)
+	{
+		m_location.y = 0.0f;
+		bump = true;
+	}
+	if (m_location.y > 600.0f)
+	{
+		m_location.y = 600.0f;
+		bump = true;
+	}
+	if (bump)
+	{
+		if (sf::Sound::Playing != m_beepSound.getStatus())
+		{
+			m_beepSound.play();
+		}
+	}
 }
