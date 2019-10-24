@@ -111,7 +111,7 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
-	m_window.draw(m_welcomeMessage);
+	m_window.draw(m_characterName);
 	m_window.draw(m_logoSprite);
 	m_window.display();
 }
@@ -121,18 +121,23 @@ void Game::render()
 /// </summary>
 void Game::setupFontAndText()
 {
-	if (!m_ArialBlackfont.loadFromFile("ASSETS\\FONTS\\ariblk.ttf"))
+	sf::Vector2f location{ 0.0f,0.0f };
+	if (!m_mariofont.loadFromFile("ASSETS\\FONTS\\SuperMario256.ttf"))
 	{
 		std::cout << "problem loading arial black font" << std::endl;
 	}
-	m_welcomeMessage.setFont(m_ArialBlackfont);
-	m_welcomeMessage.setString("SFML Game");
-	m_welcomeMessage.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
-	m_welcomeMessage.setPosition(40.0f, 40.0f);
-	m_welcomeMessage.setCharacterSize(80U);
-	m_welcomeMessage.setOutlineColor(sf::Color::Red);
-	m_welcomeMessage.setFillColor(sf::Color::Black);
-	m_welcomeMessage.setOutlineThickness(3.0f);
+	m_characterName.setFont(m_mariofont);
+	m_characterName.setString("Mario");
+	m_characterName.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
+	m_characterName.setPosition(40.0f, 40.0f);
+	m_characterName.setCharacterSize(80U);
+	m_characterName.setOutlineColor(sf::Color::Red);
+	m_characterName.setFillColor(sf::Color::Black);
+	m_characterName.setOutlineThickness(3.0f);
+	location.y = 50.0f;
+	location.x = 400 - (m_characterName.getGlobalBounds().width /2);
+	m_characterName.setPosition(location);
+
 
 }
 
