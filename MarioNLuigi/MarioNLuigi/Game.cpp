@@ -77,6 +77,10 @@ void Game::processEvents()
 		{
 			processKeys(newEvent);
 		}
+		if (sf::Event::KeyReleased == newEvent.type)
+		{
+			processKeyReleases(newEvent);
+		}
 	}
 }
 
@@ -93,7 +97,19 @@ void Game::processKeys(sf::Event t_event)
 	}
 	if (sf::Keyboard::Space == t_event.key.code)
 	{
-		changeCharacter();
+		if (canChange)
+		{
+			changeCharacter();
+			canChange = false;
+		}
+	}
+}
+
+void Game::processKeyReleases(sf::Event t_event)
+{
+	if (sf::Keyboard::Space == t_event.key.code)
+	{
+		canChange = true;
 	}
 }
 

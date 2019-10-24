@@ -25,6 +25,7 @@ private:
 
 	void processEvents();
 	void processKeys(sf::Event t_event);
+	void processKeyReleases(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
 	
@@ -43,6 +44,7 @@ private:
 	sf::Vector2f m_location{ 400.0f,300.0f };
 	sf::Vector2f m_spriteOffset{ 32.0f,74.0f };
 	bool m_ImMario{ true };
+	bool canChange{ true };
 
 };
 
