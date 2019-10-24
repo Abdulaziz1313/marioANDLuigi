@@ -30,13 +30,19 @@ private:
 	
 	void setupFontAndText();
 	void setupSprite();
+	void changeCharacter();
+
+	void centerText();
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_mariofont; // font used by message
 	sf::Text m_characterName; // text used for message on screen
-	sf::Texture m_logoTexture; // texture used for sfml logo
+	sf::Texture m_brosTexture; // texture used for sfml logo
 	sf::Sprite m_logoSprite; // sprite used for sfml logo
 	bool m_exitGame; // control exiting game
+	sf::Vector2f m_location{ 400.0f,300.0f };
+	sf::Vector2f m_spriteOffset{ 32.0f,74.0f };
+	bool m_ImMario{ true };
 
 };
 

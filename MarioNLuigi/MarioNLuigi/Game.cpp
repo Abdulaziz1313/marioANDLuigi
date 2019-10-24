@@ -91,6 +91,10 @@ void Game::processKeys(sf::Event t_event)
 	{
 		m_exitGame = true;
 	}
+	if (sf::Keyboard::Space == t_event.key.code)
+	{
+		changeCharacter();
+	}
 }
 
 /// <summary>
@@ -121,7 +125,7 @@ void Game::render()
 /// </summary>
 void Game::setupFontAndText()
 {
-	sf::Vector2f location{ 0.0f,0.0f };
+	
 	if (!m_mariofont.loadFromFile("ASSETS\\FONTS\\SuperMario256.ttf"))
 	{
 		std::cout << "problem loading arial black font" << std::endl;
@@ -131,12 +135,11 @@ void Game::setupFontAndText()
 	m_characterName.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
 	m_characterName.setPosition(40.0f, 40.0f);
 	m_characterName.setCharacterSize(80U);
-	m_characterName.setOutlineColor(sf::Color::Red);
-	m_characterName.setFillColor(sf::Color::Black);
+	m_characterName.setOutlineColor(sf::Color::Black);
+	m_characterName.setFillColor(sf::Color::Red);
 	m_characterName.setOutlineThickness(3.0f);
-	location.y = 50.0f;
-	location.x = 400 - (m_characterName.getGlobalBounds().width /2);
-	m_characterName.setPosition(location);
+
+	centerText();
 
 
 }
@@ -146,11 +149,39 @@ void Game::setupFontAndText()
 /// </summary>
 void Game::setupSprite()
 {
-	if (!m_logoTexture.loadFromFile("ASSETS\\IMAGES\\SFML-LOGO.png"))
+	if (!m_brosTexture.loadFromFile("ASSETS\\IMAGES\\mario-luigi-64.png"))
 	{
 		// simple error message if previous call fails
 		std::cout << "problem loading logo" << std::endl;
 	}
-	m_logoSprite.setTexture(m_logoTexture);
-	m_logoSprite.setPosition(300.0f, 180.0f);
+	m_logoSprite.setTexture(m_brosTexture);
+	m_logoSprite.setTextureRect(sf::IntRect{ 0, 0, 64, 148 });
+	m_logoSprite.setPosition(m_location - m_spriteOffset);
+}
+
+void Game::changeCharacter()
+{
+	m_ImMario = !m_ImMario;
+	if(m_ImMario)
+	{
+		m_characterName.setString("Mario");
+		m_characterName.setFillColor(sf::Color::Red);
+		m_logoSprite.setTextureRect(sf::IntRect{ 0,0,64,148 });
+		centerText();
+	}
+	else
+	{
+		m_characterName.setString("Luigi");
+		m_characterName.setFillColor(sf::Color::Green);
+		m_logoSprite.setTextureRect(sf::IntRect{ 64,0,64,148 });
+		centerText();
+	}
+}
+
+void Game::centerText()
+{
+	sf::Vector2f location{ 0.0f,0.0f };
+	location.y = 50.0f;
+	location.x = 400 - (m_characterName.getGlobalBounds().width / 2);
+	m_characterName.setPosition(location);
 }
