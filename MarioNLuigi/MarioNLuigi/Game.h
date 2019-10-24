@@ -11,6 +11,16 @@
 /// </summary>
 #include <SFML/Graphics.hpp>
 
+enum class Direction
+{
+	None,
+	Up,
+	Down,
+	Left,
+	Right
+};
+
+
 class Game
 {
 public:
@@ -32,8 +42,9 @@ private:
 	void setupFontAndText();
 	void setupSprite();
 	void changeCharacter();
-
+	void getDirection();
 	void centerText();
+	void move();
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_mariofont; // font used by message
@@ -45,6 +56,8 @@ private:
 	sf::Vector2f m_spriteOffset{ 32.0f,74.0f };
 	bool m_ImMario{ true };
 	bool canChange{ true };
+	Direction m_heading{ Direction::None };
+	float m_speed{ 1.6f };
 
 };
 

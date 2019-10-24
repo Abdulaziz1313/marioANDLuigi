@@ -123,6 +123,8 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+	getDirection();
+	move();
 }
 
 /// <summary>
@@ -194,10 +196,58 @@ void Game::changeCharacter()
 	}
 }
 
+void Game::getDirection()
+{
+	m_heading = Direction::None;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		m_heading = Direction::Up;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		m_heading = Direction::Down;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		m_heading = Direction::Left;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		m_heading = Direction::Right;
+	}
+}
+
 void Game::centerText()
 {
 	sf::Vector2f location{ 0.0f,0.0f };
 	location.y = 50.0f;
 	location.x = 400 - (m_characterName.getGlobalBounds().width / 2);
 	m_characterName.setPosition(location);
+}
+
+void Game::move()
+{
+	sf::Vector2f move{ 0.0f,0.0f };
+	switch (m_heading)
+	{
+	case Direction::None:
+		break;
+	case Direction::Up:
+		move.y = -m_speed;
+		break;
+	case Direction::Down:
+		move.y = m_speed;
+		break;
+	case Direction::Left:
+		move.x = -m_speed;
+		break;
+	case Direction::Right:
+		move.x = m_speed;
+		break;
+	default:
+		break;
+	}
+	m_location += move;
+	m_logoSprite.setPosition(m_location - m_spriteOffset);
+
 }
