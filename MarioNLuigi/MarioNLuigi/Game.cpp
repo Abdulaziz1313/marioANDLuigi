@@ -181,9 +181,6 @@ void Game::setupSprite()
 
 void Game::setupSound()
 {
-	//if (!m_beepBuffer.loadFromFile("ASSETS\\AUDIO\\Luigi.wav"))
-	//{
-	//}
 	if (!m_beepBuffer.loadFromFile("ASSETS\\AUDIO\\mario.wav"))
 	{
 		std::cout << "problem with sound" << std::endl;
