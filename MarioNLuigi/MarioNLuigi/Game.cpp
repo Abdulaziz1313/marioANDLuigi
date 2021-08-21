@@ -151,12 +151,12 @@ void Game::setupFontAndText()
 		std::cout << "problem loading arial black font" << std::endl;
 	}
 	m_characterName.setFont(m_mariofont);
-	m_characterName.setString("Mario");
+	m_characterName.setString("Luigi");
 	m_characterName.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
 	m_characterName.setPosition(40.0f, 40.0f);
 	m_characterName.setCharacterSize(80U);
 	m_characterName.setOutlineColor(sf::Color::Black);
-	m_characterName.setFillColor(sf::Color::Red);
+	m_characterName.setFillColor(sf::Color::Green);
 	m_characterName.setOutlineThickness(3.0f);
 
 	centerText();
@@ -175,7 +175,7 @@ void Game::setupSprite()
 		std::cout << "problem loading logo" << std::endl;
 	}
 	m_logoSprite.setTexture(m_brosTexture);
-	m_logoSprite.setTextureRect(sf::IntRect{ 0, 0, 64, 148 });
+	m_logoSprite.setTextureRect(sf::IntRect{ 64, 0, 64, 148 });
 	m_logoSprite.setPosition(m_location - m_spriteOffset);
 }
 
@@ -184,7 +184,7 @@ void Game::setupSound()
 	//if (!m_beepBuffer.loadFromFile("ASSETS\\AUDIO\\Luigi.wav"))
 	//{
 	//}
-	if (!m_beepBuffer.loadFromFile("ASSETS\\AUDIO\\mario.wav"))
+	if (!m_beepBuffer.loadFromFile("ASSETS\\AUDIO\\luigi.wav"))
 	{
 		std::cout << "problem with sound" << std::endl;
 	}
